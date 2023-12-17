@@ -19,4 +19,4 @@ async function comparePassword(password, encrpytedPassword) {
   }
 }
 
-module.exports = { encryptPassword };
+module.exports = { encryptPassword, comparePassword };

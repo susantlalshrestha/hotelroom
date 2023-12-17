@@ -17,4 +17,8 @@ router.get("/login", (req, res) => {
   res.render(`${__dirname}/../../../frontend/views/login.ejs`);
 });
 
+router.get("/addroom", (req, res) => {
+  res.render(`${__dirname}/../../../frontend/views/add-room.ejs`);
+});
+
 module.exports = router;

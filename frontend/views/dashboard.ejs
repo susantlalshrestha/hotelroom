@@ -19,6 +19,7 @@
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
+        margin-bottom: 20px;
       }
 
       th,
@@ -59,6 +60,20 @@
         background-color: #dc3545;
         color: #fff;
       }
+
+      .add-room-btn {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      .add-room-btn:hover {
+        background-color: #0056b3;
+      }
     </style>
   </head>
   <body>
@@ -88,7 +103,7 @@
             <td><%= room.maxOccupancy %></td>
             <td><%= room.availability ? 'Available' : 'Not Available' %></td>
             <td class="buttons">
-              <button class="edit" onclick="editRoom('<%= room %>')">
+              <button class="edit" onclick="editRoom('<%= room._id %>')">
                 Edit
               </button>
               <button class="delete" onclick="deleteRoom('<%= room._id %>')">
@@ -102,7 +117,8 @@
       <% } else { %>
       <p>No rooms available.</p>
       <% } %>
+      <a href="/addroom" class="add-room-btn">Add Room</a>
     </div>
-    <script src="/js/room.js" />
+    <script src="/js/room.js"></script>
   </body>
 </html>

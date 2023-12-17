@@ -10,6 +10,8 @@ const validateToken =
     // Get the token from the Authorization header
     let token = req.headers["x-access-token"] || req.headers["authorization"];
 
+    console.log(token);
+
     const decoded = decodeToken(token, "access");
 
     // If there is no token, return an error

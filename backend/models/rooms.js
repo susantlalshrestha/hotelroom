@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 const roomSchema = new mongoose.Schema({
-  roomID: {
-    type: String,
-    default: () => mongoose.Types.ObjectId().toString(), // Generate a unique ID
-    unique: true,
-  },
   hotelName: { type: String, required: true },
   roomNumber: { type: Number, required: true },
   pricePerNight: { type: Number, required: true },

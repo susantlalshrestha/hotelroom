@@ -5,7 +5,7 @@ const { connectMongo } = require("../../middlewares/mongo-connect.js");
 // Import other API routes
 const authRouter = require("./auth");
 const usersRouter = require("./users.js");
-// const roomsRouter = require("./rooms.js");
+const roomsRouter = require("./rooms.js");
 
 const router = express.Router();
 
@@ -18,7 +18,7 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 router.use("/", authRouter);
-// router.use("/room", roomsRouter);
+router.use("/room", roomsRouter);
 router.use("/user", usersRouter);
 
 module.exports = router;

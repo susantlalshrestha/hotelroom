@@ -24,14 +24,13 @@ router.post("/login", async (req, res) => {
   const { id, fullname, role, createdAt, updatedAt } = user;
   const loggedUser = { id, fullname, email, role, createdAt, updatedAt };
   const accessToken = encodeToken(loggedUser, "access", { jwtid: id });
-  req.session.is_logged = true;
-  res.send(JSON.stringify({ user: loggedUser, token: accessToken }));
+  res.cookie("is_logged", true, { maxAge: 1000 * 20, httpOnly: true });
+  res.send(JSON.stringify({ data: loggedUser, token: accessToken }));
 });
 
 router.post("/logout", (req, res) => {
-  if (!req.session?.is_logged) return res.send("Already signed out!!");
   res.clearCookie("is_logged");
-  res.send("Signed out!!");
+  res.send({ message: "Signed out!!" });
 });
 
 module.exports = router;

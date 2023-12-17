@@ -9,13 +9,11 @@ const validateToken =
 
     // Get the token from the Authorization header
     let token = req.headers["x-access-token"] || req.headers["authorization"];
-    // If a token is found, remove 'Bearer ' if it's present
-    if (token && token.startsWith("Bearer ")) {
-      token = token.slice(7, token.length);
-    }
+
+    const decoded = decodeToken(token, "access");
 
     // If there is no token, return an error
-    if (!token) {
+    if (!decoded) {
       return res.status(403).json({
         success: false,
         message: "A token is required for authentication",
@@ -24,7 +22,7 @@ const validateToken =
 
     // Try to verify the token
     try {
-      req.user = decodeToken(); // Add the decoded token to the request object
+      req.user = decoded; // Add the decoded token to the request object
     } catch (err) {
       return res.status(401).json({ success: false, message: "Invalid token" });
     }

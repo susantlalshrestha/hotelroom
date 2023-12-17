@@ -88,7 +88,7 @@
             <td><%= room.maxOccupancy %></td>
             <td><%= room.availability ? 'Available' : 'Not Available' %></td>
             <td class="buttons">
-              <button class="edit" onclick="editRoom('<%= room._id %>')">
+              <button class="edit" onclick="editRoom('<%= room %>')">
                 Edit
               </button>
               <button class="delete" onclick="deleteRoom('<%= room._id %>')">
@@ -103,16 +103,6 @@
       <p>No rooms available.</p>
       <% } %>
     </div>
-    <script>
-      function editRoom(roomId) {
-        // Add logic to handle the edit action
-        console.log(`Editing room with ID: ${roomId}`);
-      }
-
-      function deleteRoom(roomId) {
-        // Add logic to handle the delete action
-        console.log(`Deleting room with ID: ${roomId}`);
-      }
-    </script>
+    <script src="/js/room.js" />
   </body>
 </html>

@@ -1,14 +1,9 @@
 const express = require("express");
-const session = require("express-session");
-const cookieParser = require("cookie-parser");
 const { User } = require("../../models/users.js");
 const { comparePassword } = require("../../utils/encript.js");
 const { encodeToken } = require("../../utils/token-helper.js");
 
 const router = express.Router();
-
-router.use(cookieParser());
-router.use(session({ secret: process.env.SESSION_SECRET, resave: false }));
 
 router.post("/login", async (req, res) => {
   const email = req.body.email || "";
@@ -24,12 +19,15 @@ router.post("/login", async (req, res) => {
   const { id, fullname, role, createdAt, updatedAt } = user;
   const loggedUser = { id, fullname, email, role, createdAt, updatedAt };
   const accessToken = encodeToken(loggedUser, "access", { jwtid: id });
-  res.cookie("is_logged", true, { maxAge: 1000 * 20, httpOnly: true });
+  res.cookie("access_token", accessToken, {
+    maxAge: 1000 * 60 * 5,
+    httpOnly: true,
+  });
   res.send(JSON.stringify({ data: loggedUser, token: accessToken }));
 });
 
 router.post("/logout", (req, res) => {
-  res.clearCookie("is_logged");
+  res.clearCookie("access_token");
   res.send({ message: "Signed out!!" });
 });
 
